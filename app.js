@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 mongoose.connect(
-  `mongodb+srv://dbd-db-user:${process.env.DB_PW}@cluster0.ykf6z.mongodb.net/dbd-companion-mongodb?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@cluster0.ykf6z.mongodb.net/dbd-companion-mongodb?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 mongoose.connection.once("open", () => {
