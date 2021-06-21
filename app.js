@@ -3,8 +3,10 @@ const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 
 mongoose.connect(
   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@cluster0.ykf6z.mongodb.net/dbd-companion-mongodb?retryWrites=true&w=majority`,
