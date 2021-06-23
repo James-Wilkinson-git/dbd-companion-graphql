@@ -59,13 +59,23 @@ const RootQuery = new GraphQLObjectType({
     },
     perks: {
       type: new GraphQLList(PerkType),
-      args: { characterId: { type: GraphQLID } },
+      args: {
+        characterId: { type: GraphQLID },
+        query: { type: GraphQLString },
+      },
       resolve(parent, args) {
         if (args.characterId) {
           return Perk.find({ characterId: args.characterId });
-        } else {
-          return Perk.find({});
         }
+        if (args.query) {
+          return Perk.find({
+            $or: [
+              { name: new RegExp(args.query, "i") },
+              { description: new RegExp(args.query, "i") },
+            ],
+          });
+        }
+        return Perk.find({});
       },
     },
     characters: {
