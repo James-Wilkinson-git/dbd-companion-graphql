@@ -72,6 +72,7 @@ const RootQuery = new GraphQLObjectType({
             $or: [
               { name: new RegExp(args.query, "i") },
               { description: new RegExp(args.query, "i") },
+              { keywords: new RegExp(args.query, "i") },
             ],
           });
         }
